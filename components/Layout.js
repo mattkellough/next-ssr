@@ -4,7 +4,7 @@ import moment from "moment";
 import Link from "next/link";
 
 const Layout = ({ children }) => {
-  const date = moment().format("MMMM Do YYYY, h:mm:ss a");
+  const date = moment().utcOffset("-0400").format("MMMM Do YYYY, h:mm:ss a");
 
   return (
     <>
