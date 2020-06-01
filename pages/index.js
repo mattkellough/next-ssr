@@ -19,7 +19,7 @@ const Home = ({ allPosts }) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const entries = await client.getEntries({
     content_type: "blogPost",
   });

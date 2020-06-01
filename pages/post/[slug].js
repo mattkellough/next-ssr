@@ -15,26 +15,7 @@ const BlogPost = ({ entry }) => {
   );
 };
 
-export const getStaticPaths = async () => {
-  const entries = await client.getEntries({
-    content_type: "blogPost",
-  });
-
-  const paths = entries.items.map((entry) => {
-    const { slug } = entry.fields;
-
-    return {
-      params: { slug },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps = async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   const { slug } = ctx.params;
   const entry = await client.getEntries({
     content_type: "blogPost",
