@@ -1,11 +1,8 @@
 import React from "react";
 import Head from "next/head";
-import moment from "moment";
 import Link from "next/link";
 
-const Layout = ({ children }) => {
-  const date = moment().utcOffset("-0400").format("MMMM Do YYYY, h:mm:ss a");
-
+const Layout = ({ date, children }) => {
   return (
     <>
       <Head>
@@ -23,6 +20,16 @@ const Layout = ({ children }) => {
       <main>{children}</main>
     </>
   );
+};
+
+export const getServerSideProps = () => {
+  const date = moment().utcOffset("-0400").format("MMMM Do YYYY, h:mm:ss a");
+
+  return {
+    props: {
+      date,
+    },
+  };
 };
 
 export default Layout;
