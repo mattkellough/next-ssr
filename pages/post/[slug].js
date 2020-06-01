@@ -2,13 +2,14 @@ import React from "react";
 import { client } from "../../lib/contentful";
 import marked from "marked";
 import Date from "../../components/Date";
+import moment from "moment";
 
-const BlogPost = ({ entry }) => {
+const BlogPost = ({ date, entry }) => {
   const { author, body, description, heroImage, title } = entry.items[0].fields;
   const imgUrl = heroImage.fields.file.url;
   return (
     <div>
-      <Date />
+      <Date date={date} />
       <h1>{title}</h1>
       <img src={imgUrl} width="100%" />
       <div dangerouslySetInnerHTML={{ __html: marked(body) }}></div>
@@ -22,8 +23,9 @@ export const getServerSideProps = async (ctx) => {
     content_type: "blogPost",
     "fields.slug[in]": slug,
   });
+  const date = moment().utcOffset("-0400").format("MMMM Do YYYY, h:mm:ss a");
 
-  return { props: { entry } };
+  return { props: { entry, date } };
 };
 
 export default BlogPost;
