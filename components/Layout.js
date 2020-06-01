@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Head>
-        <title>SSR App - {date}</title>
+        <title>SSG App - {date}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
