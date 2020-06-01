@@ -4,29 +4,22 @@ import { client } from "../lib/contentful";
 
 const Home = ({ allPosts }) => {
   return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        {allPosts.map(({ slug, title }) => {
-          return (
-            <div key={slug}>
-              <h2>{title}</h2>
-              <Link href="/post/[slug]" as={`/post/${slug}`}>
-                <a>Go here</a>
-              </Link>
-            </div>
-          );
-        })}
-      </main>
+    <div>
+      {allPosts.map(({ slug, title }) => {
+        return (
+          <div key={slug}>
+            <h2>{title}</h2>
+            <Link href="/post/[slug]" as={`/post/${slug}`}>
+              <a>Go here</a>
+            </Link>
+          </div>
+        );
+      })}
     </div>
   );
 };
 
-export const getStaticProps = async (ctx) => {
+export const getStaticProps = async () => {
   const entries = await client.getEntries({
     content_type: "blogPost",
   });

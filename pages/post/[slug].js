@@ -2,26 +2,16 @@ import React from "react";
 import { client } from "../../lib/contentful";
 import Link from "next/link";
 import marked from "marked";
-import moment from "moment";
 
-const BlogPost = ({ entry, date }) => {
+const BlogPost = ({ entry }) => {
   const { author, body, description, heroImage, title } = entry.items[0].fields;
   const imgUrl = heroImage.fields.file.url;
   return (
-    <main>
-      <nav>
-        <Link href="/">
-          <a>Back Home</a>
-        </Link>
-      </nav>
-      <div>
-        <h1>
-          {title} : {date}
-        </h1>
-        <img src={imgUrl} width="100%" />
-        <div dangerouslySetInnerHTML={{ __html: marked(body) }}></div>
-      </div>
-    </main>
+    <div>
+      <h1>{title}</h1>
+      <img src={imgUrl} width="100%" />
+      <div dangerouslySetInnerHTML={{ __html: marked(body) }}></div>
+    </div>
   );
 };
 
@@ -51,9 +41,7 @@ export const getStaticProps = async (ctx) => {
     "fields.slug[in]": slug,
   });
 
-  const date = moment().format("MMMM Do YYYY, h:mm:ss a");
-
-  return { props: { entry, date } };
+  return { props: { entry } };
 };
 
 export default BlogPost;
