@@ -1,35 +1,23 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
+import Date from "./Date";
 
-const Layout = ({ date, children }) => {
+const Layout = ({ children }) => {
   return (
     <>
       <Head>
-        <title>SSR App - {date}</title>
+        <title>SSR App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
         <Link href="/">
           <a>Home</a>
         </Link>
-        <div>
-          <p>Time Rendered: {date}</p>
-        </div>
       </header>
       <main>{children}</main>
     </>
   );
-};
-
-export const getServerSideProps = () => {
-  const date = moment().utcOffset("-0400").format("MMMM Do YYYY, h:mm:ss a");
-
-  return {
-    props: {
-      date,
-    },
-  };
 };
 
 export default Layout;
